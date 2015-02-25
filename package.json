@@ -1,7 +1,7 @@
 {
   "name": "Tournament",
   "description": "Tournament web app",
-  "main": "index.js",
+  "main": "src/js/app.js",
   "private": true,
   "devDependencies": {
     "browserify": "^6.3.3",
@@ -10,6 +10,6 @@
     "reactify": "^0.17.1"
   },
   "scripts": {
-    "build": "browserify --debug --transform reactify index.js > bundle.js"
+    "build": "browserify --debug --transform reactify ./src/js/app.js > ./src/bundle.js"
   }
 }
