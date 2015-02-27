@@ -29,7 +29,7 @@ var TournActions = {
 			home: home,
 			away: away,
 			homeTeam: homeTeam,
-			awayteam:awayTeam,
+			awayTeam:awayTeam,
 		});
 	}
 };

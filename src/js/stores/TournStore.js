@@ -2,12 +2,8 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var TournConstants = require('../constants/TournConstants');
 var assign = require('object-assign');
-
 var robin = require('roundrobin');
-
 var CHANGE_EVENT = 'change';
-
-var _todos = {};
 
 //Set the default view to team
 var _currentView = "";
@@ -20,13 +16,48 @@ var _schedule = [];
 //Game result 
 var _games = {};
 
+function loadFromLocal(){
+	_currentView = JSON.parse(localStorage.getItem("_currentView"));
+	_players = JSON.parse(localStorage.getItem("_players"));
+	_teams = JSON.parse(localStorage.getItem("_teams"));
+	_schedule = JSON.parse(localStorage.getItem("_schedule"));
+	_games = JSON.parse(localStorage.getItem("_games"));
+
+	if(_players == null){
+		_players = {};
+	}
+	if(_teams == null){
+		_teams = {};
+	}
+	if(_schedule == null){
+		_schedule = [];
+	}
+	if(_games == null){
+		_games = {};
+	}
+}
+
+function cleanLocal(){
+	localStorage.clear();
+}
+
+function saveToLocal(){
+	localStorage.setItem("_currentView", JSON.stringify(_currentView));
+	localStorage.setItem("_player", JSON.stringify(_players));
+	localStorage.setItem("_teams", JSON.stringify(_teams));
+	localStorage.setItem("_schedule", JSON.stringify(_schedule));
+	localStorage.setItem("_games", JSON.stringify(_games));
+}
+
 function updateCurrentView(newView) {
 	_currentView = newView;
+	saveToLocal();
 }
 
 function addPlayer(playerName) {
 	var nextId = Object.keys(_players).length + 1;
 	_players[nextId] = { name: playerName, id: nextId };
+	saveToLocal();
 }
 
 function generateTeams(){
@@ -53,7 +84,8 @@ function generateTeams(){
 		var team = {
 						player1: players[index++],
 						player2: players[index++],
-						id: teamIndex
+						id: teamIndex,
+						score: 0
 					};
 		_teams[teamIndex] = team;
 		teamIndex++;
@@ -64,8 +96,7 @@ function generateTeams(){
 
 function generateSchedule() {
 	_schedule = robin(Object.keys(_teams).length);
-
-	console.log(JSON.stringify(_schedule,2));
+	saveToLocal();
 }
 
 function shuffle(array) {
@@ -86,7 +117,7 @@ function shuffle(array) {
 	return array;
 }
 
-function addGameResult(id, homeGoal, awayGoal){
+function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
 	var game = _games[id];
 	if(game == undefined){
 		game = {};
@@ -96,12 +127,24 @@ function addGameResult(id, homeGoal, awayGoal){
 	game.homeGoal = homeGoal;
 	game.awayGoal = awayGoal;
 
-	console.log("Nre game result");
+	console.log("New game result");
 	console.log(game);
 
 	_games[id] = game;
-}
 
+	//Update the score for each team
+	//home wins
+	if(homeGoal > awayGoal){
+		_teams[homeTeam].score = _teams[homeTeam].score + 2; 
+	} 
+	else if(homeGoal == awayGoal){
+		_teams[homeTeam].score = _teams[homeTeam].score + 1;
+		_teams[awayTeam].score = _teams[awayTeam].score + 1;
+	} else {
+		_teams[awayTeam].score = _teams[awayTeam].score + 2;
+	}
+	saveToLocal();
+}
 
 var TournStore = assign({}, EventEmitter.prototype, {
 
@@ -123,6 +166,10 @@ var TournStore = assign({}, EventEmitter.prototype, {
 
 	getGames: function() {
 		return _games;
+	},
+
+	loadData: function() {
+		loadFromLocal();
 	},
 
 	emitChange: function() {
@@ -168,7 +215,7 @@ AppDispatcher.register(function(action) {
 			TournStore.emitChange();
 			break;
 		case TournConstants.TOURN_GAME_RESULT:
-			addGameResult(action.id,action.home,action.away)
+			addGameResult(action.id,action.home,action.away,action.homeTeam,action.awayTeam);
 			TournStore.emitChange();
 			break;
 		default:

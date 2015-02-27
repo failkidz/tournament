@@ -20,6 +20,7 @@ function getTournState() {
 var App = React.createClass({
 
 	getInitialState: function() {
+		TournStore.loadData();
 		return getTournState();
 	},
 
@@ -44,7 +45,9 @@ var App = React.createClass({
 	        		currentView={this.state.currentView}
 	        		schedule={this.state.schedule}
 	        		games={this.state.games} />
-        		<HighScore currentView={this.state.currentView} />
+        		<HighScore 
+        			currentView={this.state.currentView} 
+        			teams={this.state.teams}/>
       		</div>
   		);
 	},

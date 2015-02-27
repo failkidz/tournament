@@ -9,10 +9,16 @@ var PlaySchedule = React.createClass({
 			return null;
 		}
 
-		// console.log(this.props.schedule);
-
 		var allTurns = this.props.schedule;
 		var turns = [];
+
+		if(allTurns.length < 1){
+			return (
+				<div className="row">
+					<p>Need to create teams first before a schedule is created</p>
+				</div>
+			);
+		}
 
 		for(var i = 0; i < allTurns.length; i++){
 			var newKey = "t"+i;
