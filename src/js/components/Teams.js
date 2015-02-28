@@ -39,11 +39,19 @@ var TeamList = React.createClass({
 });
 
 var TeamRow = React.createClass({
+
+	getInitialState: function() {
+		return {
+			isEditing: false,
+			teamName: this.props.team.teamName || "Team #"+this.props.team.id
+		};
+	},
+
 	render: function () {
 		var team = this.props.team;
 		return(
 			<div className="panel panel-default">
-				<div className="panel-heading">
+				<div className="panel-heading" onDoubleClick>
 					Team #{team.id}
 				</div>
 				<div className="panel-body">
@@ -52,6 +60,18 @@ var TeamRow = React.createClass({
 				</div>
 			</div>
 		);
+	},
+
+	_onSaveTeam: function(){
+		
+	},
+
+	_onChangeTeam: function(){
+
+	},
+
+	_onDoubleClick: function() {
+		this.setState({isEditing: true});
 	}
 });
 
