@@ -7,6 +7,10 @@ var StartPage = React.createClass({
 			return null;
 		}
 
+		// return (
+		// 	<h1>StartPag</h1>
+		// );
+
 		return (
 			<div className="page-header">
   				<h1>Example page header

@@ -63,6 +63,9 @@ var Players = React.createClass({
 						</div>
 					</div>
 					<div className="panel panel-default">
+						<div className="panel-heading">
+							Current players:
+						</div>
 						<div className="panel-body">
 							<ul>
 								{players}
@@ -73,33 +76,24 @@ var Players = React.createClass({
 			);
 		} else {
 			return (
-				<div>
-					<div className="panel panel-default">
-						<div className="panel-heading">
-							Add new player:
-						</div>
-						<div className="panel-body">
-							<label forName="enterPlayer">Player name</label>
-							<input
-								className={this.props.className}
-								onBlur={this._save}
-								onChange={this._onChange}
-								onKeyDown={this._onKeyDown}
-								value={this.state.value}
-								autoFocus={true}
-								id="enterPlayer"
-							></input>
-							<div className="pull-right">{genButton}</div>
-						</div>
+				<div className="panel panel-default">
+					<div className="panel-heading">
+						Add new player:
 					</div>
-					<div className="panel panel-default">
-						<div className="panel-body">
-							<ul>
-								{players}
-							</ul>
-						</div>
+					<div className="panel-body">
+						<label forName="enterPlayer">Player name</label>
+						<input
+							className={this.props.className}
+							onBlur={this._save}
+							onChange={this._onChange}
+							onKeyDown={this._onKeyDown}
+							value={this.state.value}
+							autoFocus={true}
+							id="enterPlayer"
+						></input>
+						<div className="pull-right">{genButton}</div>
 					</div>
-				</div>		
+				</div>	
 			);
 		}
 	},

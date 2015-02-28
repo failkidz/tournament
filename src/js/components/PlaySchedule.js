@@ -14,8 +14,10 @@ var PlaySchedule = React.createClass({
 
 		if(allTurns.length < 1){
 			return (
-				<div>
-					<p>Need to create teams first before a schedule is created</p>
+				<div className="panel panel-default">
+					<div className="panel-body">
+						Need to create teams first before a schedule is created
+					</div>
 				</div>
 			);
 		}

@@ -30,7 +30,7 @@ var ButtonRow = React.createClass({
 		);
 	},
 
-	_onTeamClick: function(){
+	_onHomeClick: function(){
 		TournActions.changeView("Home");
 	},
 
