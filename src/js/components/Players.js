@@ -22,46 +22,84 @@ var Players = React.createClass({
 			players.push(<Player key={key} player={allPlayers[key]} />);
 		}
 
+		/*
+		 * The generate key button, need to be atleast 4 ppl to make two team
+		 */
+		var genButton;
+		if(Object.keys(allPlayers).length >= 4){
+			genButton = <button 
+							type="button" 
+							className="btn btn-success" 
+							onClick={this._onGenerateTeamClick}
+						>Generate teams</button>
+		} else {
+			genButton = <button 
+							type="button" 
+							className="btn btn-success" 
+							onClick={this._onGenerateTeamClick}
+							disabled="disabled"
+						>Generate teams</button>
+		};
+
 		if(players.length > 0){
 			return (
 				<div>
-					<label forName="enterPlayer">Player name</label>
-					<input
-						className={this.props.className}
-						onBlur={this._save}
-						onChange={this._onChange}
-						onKeyDown={this._onKeyDown}
-						value={this.state.value}
-						autoFocus={true}
-						id="enterPlayer"
-					></input>
-					<hr/>
-					<ul>
-						{players}
-					</ul>
-					<button 
-						type="button" 
-						className="btn btn-success" 
-						onClick={this._onGenerateTeamClick}
-					>Generate teams</button>
+					<div className="panel panel-default">
+						<div className="panel-heading">
+							Add new player:
+						</div>
+						<div className="panel-body">
+							<label forName="enterPlayer">Player name</label>
+							<input
+								className={this.props.className}
+								onBlur={this._save}
+								onChange={this._onChange}
+								onKeyDown={this._onKeyDown}
+								value={this.state.value}
+								autoFocus={true}
+								id="enterPlayer"
+							></input>
+							<div className="pull-right">{genButton}</div>
+						</div>
+					</div>
+					<div className="panel panel-default">
+						<div className="panel-body">
+							<ul>
+								{players}
+							</ul>
+						</div>
+					</div>
 				</div>
 			);
 		} else {
 			return (
 				<div>
-					<label forName="enterPlayer">Player name</label>
-					<input
-						className={this.props.className}
-						onBlur={this._save}
-						onChange={this._onChange}
-						onKeyDown={this._onKeyDown}
-						value={this.state.value}
-						autoFocus={true}
-						id="enterPlayer"
-					></input>
-					<hr/>
-					<p>no players yet</p>
-				</div>
+					<div className="panel panel-default">
+						<div className="panel-heading">
+							Add new player:
+						</div>
+						<div className="panel-body">
+							<label forName="enterPlayer">Player name</label>
+							<input
+								className={this.props.className}
+								onBlur={this._save}
+								onChange={this._onChange}
+								onKeyDown={this._onKeyDown}
+								value={this.state.value}
+								autoFocus={true}
+								id="enterPlayer"
+							></input>
+							<div className="pull-right">{genButton}</div>
+						</div>
+					</div>
+					<div className="panel panel-default">
+						<div className="panel-body">
+							<ul>
+								{players}
+							</ul>
+						</div>
+					</div>
+				</div>		
 			);
 		}
 	},

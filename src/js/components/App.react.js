@@ -1,6 +1,7 @@
 var React = require('react');
 var TournStore = require('../stores/TournStore');
 
+var StartPage = require('./StartPage');
 var ButtonRow = require('./ButtonRow.react');
 var Teams = require('./Teams');
 var HighScore = require('./HighScore');
@@ -37,6 +38,8 @@ var App = React.createClass({
 		return (
 			<div>
         		<ButtonRow />
+        		<StartPage 
+        			currentView={this.state.currentView} />
 	        	<Teams 
 	        		currentView={this.state.currentView}
 	        		players = {this.state.players}

@@ -16,9 +16,7 @@ var Teams = React.createClass({
 		}
 
 		return (
-			<div className="row">
-				<Players allPlayers={this.props.players} />
-			</div>
+			<Players allPlayers={this.props.players} />
 		);
 	}
 });
@@ -44,10 +42,14 @@ var TeamRow = React.createClass({
 	render: function () {
 		var team = this.props.team;
 		return(
-			<div>
-				<h3>Team #{team.id}</h3>
-				<p>Player 1: {team.player1.name}</p>
-				<p>Player 2: {team.player2.name}</p>
+			<div className="panel panel-default">
+				<div className="panel-heading">
+					Team #{team.id}
+				</div>
+				<div className="panel-body">
+					<p>Player 1: {team.player1.name}</p>
+					<p>Player 2: {team.player2.name}</p>
+				</div>
 			</div>
 		);
 	}

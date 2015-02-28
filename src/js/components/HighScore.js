@@ -11,7 +11,7 @@ var HighScore = React.createClass({
 
 		if(Object.keys(this.props.teams).length < 0){
 			return (
-				<div className="row">
+				<div>
 					<h2>Scoreboard</h2>
 					<p>No teams avaible at this point</p>
 				</div>
@@ -19,7 +19,7 @@ var HighScore = React.createClass({
 		}
 
 		return (
-			<div className="row">
+			<div>
 				<h2>Scoreboard</h2>
 				<ScoreTable key={"scorelist"} teams={this.props.teams} />
 			</div>

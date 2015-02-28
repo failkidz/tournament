@@ -14,7 +14,7 @@ var PlaySchedule = React.createClass({
 
 		if(allTurns.length < 1){
 			return (
-				<div className="row">
+				<div>
 					<p>Need to create teams first before a schedule is created</p>
 				</div>
 			);
@@ -26,7 +26,7 @@ var PlaySchedule = React.createClass({
 		}
 
 		return (
-			<div className="row">
+			<div>
 				{turns}
 			</div>
 		);
@@ -43,8 +43,6 @@ var PlayTurn = React.createClass({
 			var newKey = this.props.myKey+"-"+i;
 			matches.push(<Turn key={newKey} myKey={newKey} match={allMatches[i]} games={this.props.games} />);
 		}
-
-		console.log("CurrentKey: " + this.props.myKey);
 
 		return(
 			<div>

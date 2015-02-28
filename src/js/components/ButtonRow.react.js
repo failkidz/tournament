@@ -4,21 +4,34 @@ var TournActions = require('../actions/TournActions');
 var ButtonRow = React.createClass({
 
 	render: function () {
+
 		return (
-			<div className="row">
-				<div className="btn-group btn-group-justified" role="group">
-					<div className="btn-group" role="group">
-						<button type="button" className="btn btn-default" onClick={this._onTeamClick}>Teamsssss</button>
+			<nav className="navbar navbar-default">
+  				<div className="container-fluid">
+  					<div className="navbar-header">
+  						<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+  							<span className="sr-only">Toggle navigation</span>
+						    <span className="icon-bar"></span>
+							<span className="icon-bar"></span>
+							<span className="icon-bar"></span>
+						</button>
+						<a className="navbar-brand" onClick={this._onHomeClick}>FKZ - Tournament</a>
   					</div>
-					<div className="btn-group" role="group">
-						<button type="button" className="btn btn-default" onClick={this._onHighScoreClick}>Schedule</button>
+
+					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul className="nav navbar-nav">
+							<li><a onClick={this._onTeamClick}>Teams</a></li>
+							<li><a onClick={this._onHighScoreClick}>Schedule</a></li>
+							<li><a onClick={this._onScoreBoardClick}>Scoreboard</a></li>
+						</ul>
 					</div>
-					<div className="btn-group" role="group">
-						<button type="button" className="btn btn-default" onClick={this._onScoreBoardClick}>Scoreboard</button>
-					</div>
-				</div>
-			</div>
+  				</div>
+  			</nav>
 		);
+	},
+
+	_onTeamClick: function(){
+		TournActions.changeView("Home");
 	},
 
 	_onTeamClick: function(){
