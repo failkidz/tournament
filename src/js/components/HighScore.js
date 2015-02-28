@@ -9,19 +9,21 @@ var HighScore = React.createClass({
 			return null;
 		}
 
-		if(Object.keys(this.props.teams).length < 0){
+		if(Object.keys(this.props.teams).length <= 0){
 			return (
-				<div>
-					<h2>Scoreboard</h2>
-					<p>No teams avaible at this point</p>
+				<div className="panel panel-default">
+					<div className="panel-body">
+						Crete teams and play matches before viewing highscore.
+					</div>
 				</div>
 			);			
 		}
 
 		return (
-			<div>
-				<h2>Scoreboard</h2>
-				<ScoreTable key={"scorelist"} teams={this.props.teams} />
+			<div className="panel panel-default">
+				<div className="panel-body">
+					<ScoreTable key={"scorelist"} teams={this.props.teams} />
+				</div>
 			</div>
 		);
 	}

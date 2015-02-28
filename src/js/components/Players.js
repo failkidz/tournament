@@ -49,9 +49,9 @@ var Players = React.createClass({
 							Add new player:
 						</div>
 						<div className="panel-body">
-							<label forName="enterPlayer">Player name</label>
 							<input
 								className={this.props.className}
+								placeholder="John Doe"
 								onBlur={this._save}
 								onChange={this._onChange}
 								onKeyDown={this._onKeyDown}
@@ -81,9 +81,9 @@ var Players = React.createClass({
 						Add new player:
 					</div>
 					<div className="panel-body">
-						<label forName="enterPlayer">Player name</label>
 						<input
 							className={this.props.className}
+							placeholder="John Doe"
 							onBlur={this._save}
 							onChange={this._onChange}
 							onKeyDown={this._onKeyDown}
