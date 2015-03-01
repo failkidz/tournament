@@ -75,10 +75,13 @@ var ScoreTable = React.createClass({
 var ScoreRow = React.createClass({
 	render: function() {
 		var team = this.props.team;
+
+		var teamName = team.teamName || "Team #"+team.id;
+
 		return (
 			<tr>
 				<td>{this.props.rowNumber+1}</td>
-				<td>Team #{team.id}</td>
+				<td>{teamName}</td>
 				<td>{team.score}</td>
 			</tr>
 		);
