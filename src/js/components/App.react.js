@@ -47,7 +47,8 @@ var App = React.createClass({
 	        	<PlaySchedule
 	        		currentView={this.state.currentView}
 	        		schedule={this.state.schedule}
-	        		games={this.state.games} />
+	        		games={this.state.games} 
+	        		teams={this.state.teams} />
         		<HighScore 
         			currentView={this.state.currentView} 
         			teams={this.state.teams}/>

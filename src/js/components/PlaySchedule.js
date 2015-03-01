@@ -24,7 +24,7 @@ var PlaySchedule = React.createClass({
 
 		for(var i = 0; i < allTurns.length; i++){
 			var newKey = "t"+i;
-			turns.push(<PlayTurn myKey={newKey} turn={allTurns[i]} turnNumber={i+1} games={this.props.games}/>);
+			turns.push(<PlayTurn myKey={newKey} turn={allTurns[i]} turnNumber={i+1} games={this.props.games} teams={this.props.teams} />);
 		}
 
 		return (
@@ -43,7 +43,7 @@ var PlayTurn = React.createClass({
 
 		for(var i = 0; i < allMatches.length; i++){
 			var newKey = this.props.myKey+"-"+i;
-			matches.push(<Turn key={newKey} myKey={newKey} match={allMatches[i]} games={this.props.games} />);
+			matches.push(<Turn key={newKey} myKey={newKey} match={allMatches[i]} games={this.props.games} teams={this.props.teams} />);
 		}
 
 		return(
@@ -97,9 +97,14 @@ var Turn = React.createClass({
 			);
 		}
 
+		var teamHome = this.props.teams[this.props.match[0]].teamName || "Team " + this.props.match[0];
+		var teamAway = this.props.teams[this.props.match[1]].teamName || "Team " + this.props.match[1];
+
+		console.log("Home team: " + teamHome);
+
 		return (
 			<div>
-				<p onDoubleClick={this._onDoubleClick}>Team {this.props.match[0]} vs Team {this.props.match[1]}</p>
+				<p onDoubleClick={this._onDoubleClick}>{teamHome} vs {teamAway}</p>
 			</div>
 		);
 	},
