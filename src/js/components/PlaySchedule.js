@@ -47,9 +47,13 @@ var PlayTurn = React.createClass({
 		}
 
 		return(
-			<div>
-				<h2>Turn {this.props.turnNumber}</h2>
-				{matches}
+			<div className="panel panel-default">
+  				<div className="panel-heading">
+    				<h3 className="panel-title">Turn {this.props.turnNumber}</h3>
+  				</div>
+  				<div className="panel-body">
+    				{matches}
+  				</div>
 			</div>
 		);
 	}
@@ -90,7 +94,7 @@ var Turn = React.createClass({
 					></input>
 					<button 
 						type="button" 
-						className="btn btn-default" 
+						className="btn btn-default btn-sm" 
 						onClick={this._onSaveResult}
 					>Save</button>
 				</div>
