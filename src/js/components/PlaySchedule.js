@@ -114,7 +114,6 @@ var Turn = React.createClass({
 	},
 
 	_onChangeAway: function(event) {
-		console.log(event.target.value);
 		this.setState({
 			away: event.target.value
 		});

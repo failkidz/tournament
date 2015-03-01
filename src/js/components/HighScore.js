@@ -39,7 +39,6 @@ var ScoreTable = React.createClass({
 
 		for(var key in allTeams){
 			localTeams.push(allTeams[key]);
-			console.log(allTeams[key]);
 		}
 
 		var compare = function(a,b) {

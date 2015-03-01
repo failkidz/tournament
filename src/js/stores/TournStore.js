@@ -6,7 +6,7 @@ var robin = require('roundrobin');
 var CHANGE_EVENT = 'change';
 
 //Set the default view to team
-var _currentView = "";
+var _currentView = "Home";
 //Players
 var _players = {};
 //Teams
@@ -151,6 +151,13 @@ function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
 	saveToLocal();
 }
 
+function setTeamName(teamId, teamName){
+
+	console.log("Teamid: " + teamId + "Team name: " + teamName);
+	_teams[teamId].teamName = teamName;
+	saveToLocal();
+}
+
 var TournStore = assign({}, EventEmitter.prototype, {
 
 	getCurrentView: function() {
@@ -223,6 +230,9 @@ AppDispatcher.register(function(action) {
 			addGameResult(action.id,action.home,action.away,action.homeTeam,action.awayTeam);
 			TournStore.emitChange();
 			break;
+		case TournConstants.TOURN_SET_TEAMNAME:
+			setTeamName(action.teamId, action.teamName);
+			TournStore.emitChange();
 		default:
 	}
 });

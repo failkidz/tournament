@@ -31,6 +31,14 @@ var TournActions = {
 			homeTeam: homeTeam,
 			awayTeam:awayTeam,
 		});
+	},
+
+	saveTeamName: function(teamId, newTeamName){
+		AppDispatcher.dispatch({
+			actionType: TournConstants.TOURN_SET_TEAMNAME,
+			teamId: teamId,
+			teamName: newTeamName
+		});
 	}
 };
 
