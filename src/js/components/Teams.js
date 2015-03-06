@@ -78,7 +78,8 @@ var TeamRow = React.createClass({
 		return(
 			<div className="panel panel-default">
 				<div className="panel-heading" onClick={this._onClickTeam}>
-					{this.state.teamName}
+					{this.state.teamName+" "} 
+					<span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 				</div>
 				<div className="panel-body">
 					<p>Player 1: {team.player1.name}</p>

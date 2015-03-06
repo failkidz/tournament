@@ -82,22 +82,33 @@ var Turn = React.createClass({
 
 		if(this.state.isEditing){
 			return (
-				<div>
-					<input
-						onChange={this._onChangeHome}
-						value={this.state.home}
-					></input>
-					<span>vs</span>
-					<input
-						onChange={this._onChangeAway}
-						value={this.state.away}
-					></input>
+				<form className="form-inline">
+					<div className="form-group">
+						<label className="sr-only" for="homeScore">Score for home team</label>
+						<input
+							onChange={this._onChangeHome}
+							value={this.state.home}
+							className="form-control"
+							id="homeScore"
+							placeholder="Home"></input>
+					</div>
+					<span>{" vs "}</span> 
+					<div className="form-group">
+						<label className="sr-only" for="awayScore">Score for away team</label>
+						<input
+							onChange={this._onChangeAway}
+							value={this.state.away}
+							className="form-control"
+							id="awayScore"
+						placeholder="Away"></input>
+					</div>
+					<span>{" "}</span> 
 					<button 
-						type="button" 
-						className="btn btn-default btn-sm" 
+						type="button"
+						className="btn btn-default"
 						onClick={this._onSaveResult}
 					>Save</button>
-				</div>
+				</form>
 			);
 		}
 
@@ -107,8 +118,8 @@ var Turn = React.createClass({
 		console.log("Home team: " + teamHome);
 
 		return (
-			<div>
-				<p onDoubleClick={this._onDoubleClick}>{teamHome} vs {teamAway}</p>
+			<div onClick={this._onDoubleClick}>
+				<p>{teamHome} vs {teamAway + " "} <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span></p>
 			</div>
 		);
 	},

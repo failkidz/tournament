@@ -39,6 +39,12 @@ var TournActions = {
 			teamId: teamId,
 			teamName: newTeamName
 		});
+	},
+
+	deleteData: function(){
+		AppDispatcher.dispatch({
+			actionType: TournConstants.TOURN_DELETE_DATA
+		});
 	}
 };
 

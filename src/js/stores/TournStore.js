@@ -18,28 +18,32 @@ var _games = {};
 
 function loadFromLocal(){
 
-	console.log("YOLO: " + localStorage.getItem("YOLO"));
+	// console.log("YOLO: " + localStorage.getItem("YOLO"));
 
-	// _currentView = JSON.parse(localStorage.getItem("_currentView"));
-	// _players = JSON.parse(localStorage.getItem("_players"));
-	// _teams = JSON.parse(localStorage.getItem("_teams"));
-	// _schedule = JSON.parse(localStorage.getItem("_schedule"));
-	// _games = JSON.parse(localStorage.getItem("_games"));
+	_currentView = JSON.parse(localStorage.getItem("_currentView"));
+	_players = JSON.parse(localStorage.getItem("_players"));
+	_teams = JSON.parse(localStorage.getItem("_teams"));
+	_schedule = JSON.parse(localStorage.getItem("_schedule"));
+	_games = JSON.parse(localStorage.getItem("_games"));
 
-	// if(_players == null){
-	// 	_players = {};
-	// }
-	// if(_teams == null){
-	// 	_teams = {};
-	// }
-	// if(_schedule == null){
-	// 	_schedule = [];
-	// }
-	// if(_games == null){
-	// 	_games = {};
-	// }
-	// localStorage.clear();
-	// _currentView = "StartPage";
+	console.log(JSON.parse(null));
+
+	if(_currentView == null){
+		_currentView = "Home";
+	}
+
+	if(_players == null){
+		_players = {};
+	}
+	if(_teams == null){
+		_teams = {};
+	}
+	if(_schedule == null){
+		_schedule = [];
+	}
+	if(_games == null){
+		_games = {};
+	}
 }
 
 function cleanLocal(){
@@ -97,11 +101,11 @@ function generateTeams(){
 	}
 
 	generateSchedule();
+	saveToLocal();
 }
 
 function generateSchedule() {
 	_schedule = robin(Object.keys(_teams).length);
-	saveToLocal();
 }
 
 function shuffle(array) {
@@ -232,6 +236,9 @@ AppDispatcher.register(function(action) {
 			break;
 		case TournConstants.TOURN_SET_TEAMNAME:
 			setTeamName(action.teamId, action.teamName);
+			TournStore.emitChange();
+		case TournConstants.TOURN_DELETE_DATA:
+			cleanLocal();
 			TournStore.emitChange();
 		default:
 	}
