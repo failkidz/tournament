@@ -37,7 +37,8 @@ var App = React.createClass({
 
 		return (
 			<div>
-        		<ButtonRow />
+        		<ButtonRow 
+					currentView={this.state.currentView} />
         		<StartPage 
         			currentView={this.state.currentView} />
 	        	<Teams 

@@ -5,6 +5,26 @@ var ButtonRow = React.createClass({
 
 	render: function () {
 
+		var navbars = []
+
+		if(this.props.currentView == "Teams"){
+			navbars.push(<li className="active"><a onClick={this._onTeamClick}>Teams</a></li>);
+		} else {
+			navbars.push(<li><a onClick={this._onTeamClick}>Teams</a></li>);
+		}
+
+		if(this.props.currentView == "Schedule"){
+			navbars.push(<li className="active"><a onClick={this._onHighScoreClick}>Schedule</a></li>);
+		} else {
+			navbars.push(<li><a onClick={this._onHighScoreClick}>Schedule</a></li>);
+		}
+
+		if(this.props.currentView == "HighScore"){
+			navbars.push(<li className="active"><a onClick={this._onScoreBoardClick}>Scoreboard</a></li>);
+		} else {
+			navbars.push(<li><a onClick={this._onScoreBoardClick}>Scoreboard</a></li>);
+		}
+
 		return (
 			<nav className="navbar navbar-default">
   				<div className="container-fluid">
@@ -20,9 +40,7 @@ var ButtonRow = React.createClass({
 
 					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul className="nav navbar-nav">
-							<li><a onClick={this._onTeamClick}>Teams</a></li>
-							<li><a onClick={this._onHighScoreClick}>Schedule</a></li>
-							<li><a onClick={this._onScoreBoardClick}>Scoreboard</a></li>
+							{navbars}
 						</ul>
 					</div>
   				</div>
