@@ -257,6 +257,10 @@ var TournStore = assign({}, EventEmitter.prototype, {
 		loadFromLocal();
 	},
 
+	getHighScore: function() {
+		return _highscore;
+	},
+
 	emitChange: function() {
 		this.emit(CHANGE_EVENT);
 	},

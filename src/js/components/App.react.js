@@ -14,7 +14,8 @@ function getTournState() {
     	players: TournStore.getPlayers(),
     	teams: TournStore.getTeams(),
     	schedule: TournStore.getSchedule(),
-    	games: TournStore.getGames()
+    	games: TournStore.getGames(),
+    	highscore: TournStore.getHighScore()
 	};
 }
 
@@ -52,7 +53,8 @@ var App = React.createClass({
 	        		teams={this.state.teams} />
         		<HighScore 
         			currentView={this.state.currentView} 
-        			teams={this.state.teams}/>
+        			teams={this.state.teams}
+        			highscore={this.state.highscore} />
       		</div>
   		);
 	},

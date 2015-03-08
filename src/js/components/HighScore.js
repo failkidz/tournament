@@ -32,27 +32,28 @@ var HighScore = React.createClass({
 var ScoreTable = React.createClass({
 	render: function(){
 
-		var allTeams = this.props.teams;
+		var allHighscore = this.props.highscore;
+		var localTeams = this.props.teams;
 
-		var localTeams = [];
+		var localScoreRows = [];
 		var scoreRows = [];
 
-		for(var key in allTeams){
-			localTeams.push(allTeams[key]);
+		for(var key in allHighscore){
+			localScoreRows.push(allHighscore[key]);
 		}
 
 		var compare = function(a,b) {
-  			if (a.score < b.score)
+  			if (a.points < b.points)
      			return -1;
-  			if (a.score > b.score)
+  			if (a.points > b.points)
     			return 1;
   			return 0;
   		}
 
-  		localTeams.sort(compare);
-  		localTeams.reverse();
-  		for(var i = 0; i < localTeams.length; i++){
-  			scoreRows.push(<ScoreRow key={"row"+i} team={localTeams[i]} rowNumber={i} />);
+  		localScoreRows.sort(compare);
+  		localScoreRows.reverse();
+  		for(var i = 0; i < localScoreRows.length; i++){
+  			scoreRows.push(<ScoreRow key={"row"+i} team={localTeams[i]} highscore={localScoreRows[i]} rowNumber={i} />);
   		}
 
 		return (
@@ -61,7 +62,14 @@ var ScoreTable = React.createClass({
 					<tr>
 						<th>#</th>
 						<th>Team</th>
-						<th>Score</th>
+						<th>Played</th>
+						<th>Won</th>
+						<th>Drawn</th>
+						<th>Lost</th>
+						<th>For</th>
+						<th>Against</th>
+						<th>+/-</th>
+						<th>Points</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -75,14 +83,22 @@ var ScoreTable = React.createClass({
 var ScoreRow = React.createClass({
 	render: function() {
 		var team = this.props.team;
+		var hs = this.props.highscore;
 
 		var teamName = team.teamName || "Team #"+team.id;
 
 		return (
 			<tr>
 				<td>{this.props.rowNumber+1}</td>
-				<td>{teamName}</td>
-				<td>{team.score}</td>
+				<td>{hs.teamName}</td>
+				<th>{hs.played}</th>
+				<th>{hs.won}</th>
+				<th>{hs.drawn}</th>
+				<th>{hs.lost}</th>
+				<th>{hs.goalMade}</th>
+				<th>{hs.goalLetIn}</th>
+				<th>{hs.goalDiff}</th>
+				<td>{hs.points}</td>
 			</tr>
 		);
 	}
