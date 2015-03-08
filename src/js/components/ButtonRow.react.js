@@ -7,6 +7,12 @@ var ButtonRow = React.createClass({
 
 		var navbars = []
 
+		if(this.props.currentView == "Home"){
+			navbars.push(<li className="active"><a onClick={this._onHomeClick}>Home</a></li>);
+		} else {
+			navbars.push(<li><a onClick={this._onHomeClick}>Home</a></li>);
+		}
+
 		if(this.props.currentView == "Teams"){
 			navbars.push(<li className="active"><a onClick={this._onTeamClick}>Teams</a></li>);
 		} else {

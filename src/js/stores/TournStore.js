@@ -15,6 +15,8 @@ var _teams = {};
 var _schedule = [];
 //Game result 
 var _games = {};
+//highscore table
+var _highscore = {};
 
 function loadFromLocal(){
 
@@ -48,6 +50,7 @@ function loadFromLocal(){
 
 function cleanLocal(){
 	localStorage.clear();
+	loadFromLocal();
 }
 
 function saveToLocal(){
@@ -127,32 +130,98 @@ function shuffle(array) {
 }
 
 function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
+	var newId = homeTeam+"-"+awayTeam;
+	id = newId;
 	var game = _games[id];
 	if(game == undefined){
+		console.log("Found a new game result");
 		game = {};
 	}
 
 	game.id = id;
 	game.homeGoal = homeGoal;
 	game.awayGoal = awayGoal;
+	game.homTeam = homeTeam;
+	game.awayTeam = awayTeam;
 
 	console.log("New game result");
 	console.log(game);
 
 	_games[id] = game;
 
-	//Update the score for each team
-	//home wins
-	if(homeGoal > awayGoal){
-		_teams[homeTeam].score = _teams[homeTeam].score + 2; 
-	} 
-	else if(homeGoal == awayGoal){
-		_teams[homeTeam].score = _teams[homeTeam].score + 1;
-		_teams[awayTeam].score = _teams[awayTeam].score + 1;
-	} else {
-		_teams[awayTeam].score = _teams[awayTeam].score + 2;
-	}
+	// //Update the score for each team
+	// //home wins
+	// if(homeGoal > awayGoal){
+	// 	_teams[homeTeam].score = _teams[homeTeam].score + 2; 
+	// } 
+	// else if(homeGoal == awayGoal){
+	// 	_teams[homeTeam].score = _teams[homeTeam].score + 1;
+	// 	_teams[awayTeam].score = _teams[awayTeam].score + 1;
+	// } else {
+	// 	_teams[awayTeam].score = _teams[awayTeam].score + 2;
+	// }
+	createHighscore();
 	saveToLocal();
+}
+
+function getDefaultHighScoreRow(teamName){
+	return {
+		teamName: teamName,
+		played:0,
+		goalMade:0,
+		goalLetIn:0,
+		goalDiff:0,
+		won:0,
+		lost:0,
+		draw:0,
+	};
+}
+
+function createHighscore(){
+	for(var game in _games){
+		var hTeam = _teams[game.homeTeam];
+		var aTeam = _teams[game.awayTeam];
+
+		//Get the current highscore rows;
+		var hRow = _highscore[game.homeTeam];
+		var aRow = _highscore[game.awayTeam];
+		if(hRow == undefined){
+			hRow = getDefaultHighScoreRow(hTeam.teamName);
+		}
+		if(aRow == undefined){
+			aRow = getDefaultHighScoreRow(aTeam.teamName);
+		}
+
+		//Goal diff
+		hRow.played += 1;
+		aRow.played += 1;
+		hRow.goalMade += game.homeGoal;
+		hRow.goalLetIn += game.awayGoal;
+		aRow.goalMade += game.awayGoal;
+		aRow.goalLetIn += game.homeGoal;
+		hRow.goalDiff = hRow.goalMade - hRow.goalLetIn;
+		aRow.goalDiff = aRow.goalMade - aRow.goalLetIn;
+
+		//Whom won
+		if(game.homeGoal > game.awayGoal){
+			hRow.won += 1;
+			aRow.lost += 1;
+			hRow.points += 3;
+		} else if(game.homeGoal == hame.awayGoal){
+			hRow.draw += 1;
+			aRow.draw += 1;
+			hRow.points += 1;
+			aRow.points += 1;
+		} else {
+			hRow.lost += 1;
+			aRow.won += 1;
+			aRow.points += 3;
+		}
+
+		//Save down the result
+		_highscore[game.homeTeam] = hRow;
+		_highscore[game.awayTeam] = aRow;
+	}
 }
 
 function setTeamName(teamId, teamName){
@@ -237,6 +306,7 @@ AppDispatcher.register(function(action) {
 		case TournConstants.TOURN_SET_TEAMNAME:
 			setTeamName(action.teamId, action.teamName);
 			TournStore.emitChange();
+			break;
 		case TournConstants.TOURN_DELETE_DATA:
 			cleanLocal();
 			TournStore.emitChange();
