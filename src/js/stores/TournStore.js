@@ -132,6 +132,18 @@ function shuffle(array) {
 function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
 	var newId = homeTeam+"-"+awayTeam;
 	id = newId;
+
+
+	homeGoal = parseInt(homeGoal);
+	awayGoal = parseInt(awayGoal);
+
+	console.log(typeof homeGoal);
+
+	if(typeof homeGoal == 'number' && typeof awayGoal == 'number'){
+		alert("Goals must a number");
+		return;
+	}
+
 	var game = _games[id];
 	if(game == undefined){
 		console.log("Found a new game result");
@@ -141,7 +153,7 @@ function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
 	game.id = id;
 	game.homeGoal = homeGoal;
 	game.awayGoal = awayGoal;
-	game.homTeam = homeTeam;
+	game.homeTeam = homeTeam;
 	game.awayTeam = awayTeam;
 
 	console.log("New game result");
@@ -164,9 +176,9 @@ function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
 	saveToLocal();
 }
 
-function getDefaultHighScoreRow(teamName){
+function getDefaultHighScoreRow(teamId){
 	return {
-		teamName: teamName,
+		teamId: teamId,
 		played:0,
 		goalMade:0,
 		goalLetIn:0,
@@ -182,14 +194,22 @@ function createHighscore(){
 		var hTeam = _teams[game.homeTeam];
 		var aTeam = _teams[game.awayTeam];
 
+		console.log("Home team: " + hTeam);
+
+		console.log("game:");
+		console.log(game);
+		console.log("teams:");
+		console.log(_teams);
+
+
 		//Get the current highscore rows;
 		var hRow = _highscore[game.homeTeam];
 		var aRow = _highscore[game.awayTeam];
 		if(hRow == undefined){
-			hRow = getDefaultHighScoreRow(hTeam.teamName);
+			hRow = getDefaultHighScoreRow(game.homeTeam);
 		}
 		if(aRow == undefined){
-			aRow = getDefaultHighScoreRow(aTeam.teamName);
+			aRow = getDefaultHighScoreRow(game.awayTeam);
 		}
 
 		//Goal diff
@@ -207,7 +227,7 @@ function createHighscore(){
 			hRow.won += 1;
 			aRow.lost += 1;
 			hRow.points += 3;
-		} else if(game.homeGoal == hame.awayGoal){
+		} else if(game.homeGoal == game.awayGoal){
 			hRow.draw += 1;
 			aRow.draw += 1;
 			hRow.points += 1;
@@ -217,6 +237,11 @@ function createHighscore(){
 			aRow.won += 1;
 			aRow.points += 3;
 		}
+
+		console.log("Home rows");
+		console.log(hRow);
+		console.log("away rows:");
+		console.log(aRow);
 
 		//Save down the result
 		_highscore[game.homeTeam] = hRow;

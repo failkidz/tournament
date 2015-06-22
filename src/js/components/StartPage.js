@@ -33,7 +33,7 @@ var StartPage = React.createClass({
 	},
 
 	_clickClearData: function(){
-		var answer = prompt("Type delelete to erase your tournament data");
+		var answer = prompt("Type delete to erase your tournament data");
 		if (answer != null && answer === "delete") {
 			TournActions.deleteData();
 		} else {
