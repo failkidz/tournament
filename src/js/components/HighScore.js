@@ -2,12 +2,7 @@ var React = require('react');
 var ReactPropTypes = React.PropTypes;
 
 var HighScore = React.createClass({
-
 	render: function () {
-
-		console.log("Hightscore prop: ");
-		console.log(this.props.highscore);
-
 		if(this.props.currentView != "HighScore"){
 			return null;
 		}
@@ -34,15 +29,8 @@ var HighScore = React.createClass({
 
 var ScoreTable = React.createClass({
 	render: function(){
-
-		// console.log("Hightscore prop: ");
-		// console.log(this.props.highscore);
-
 		var allHighscore = this.props.highscore;
 		var localTeams = this.props.teams;
-
-		console.log("localTeams:")
-		console.log(localTeams)
 
 		var localScoreRows = [];
 		var scoreRows = [];
@@ -62,7 +50,6 @@ var ScoreTable = React.createClass({
   		localScoreRows.sort(compare);
   		localScoreRows.reverse();
   		for(var i = 0; i < localScoreRows.length; i++){
-
   			scoreRows.push(<ScoreRow key={"row"+i} team={localTeams[localScoreRows[i].teamId]} highscore={localScoreRows[i]} rowNumber={i} />);
   		}
 
@@ -94,15 +81,8 @@ var ScoreTable = React.createClass({
 
 var ScoreRow = React.createClass({
 	render: function() {
-
-		console.log("Props:");
-		console.log(this.props);
 		var team = this.props.team;
 		var hs = this.props.highscore;
-
-		console.log("Team: ");
-		console.log(team);
-
 		var teamName = team.teamName || "Team #"+team.id;
 
 		return (

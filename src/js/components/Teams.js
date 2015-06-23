@@ -40,10 +40,7 @@ var TeamList = React.createClass({
 });
 
 var TeamRow = React.createClass({
-
 	getInitialState: function() {
-		console.log(this.props.team.teamName);
-
 		return {
 			isEditing: false,
 			teamName: this.props.team.teamName || "Team #"+this.props.team.id

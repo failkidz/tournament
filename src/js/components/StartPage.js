@@ -3,7 +3,6 @@ var TournActions = require('../actions/TournActions');
 
 var StartPage = React.createClass({
 	render: function() {
-
 		if(this.props.currentView != "Home"){
 			return null;
 		}

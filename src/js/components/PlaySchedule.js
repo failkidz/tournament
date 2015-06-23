@@ -2,9 +2,7 @@ var React = require('react');
 var TournActions = require('../actions/TournActions');
 
 var PlaySchedule = React.createClass({
-
 	render: function () {
-
 		if(this.props.currentView != "Schedule"){
 			return null;
 		}
@@ -37,7 +35,6 @@ var PlaySchedule = React.createClass({
 
 var PlayTurn = React.createClass({
 	render: function (){
-
 		allMatches = this.props.turn;
 		matches = [];
 
@@ -60,17 +57,8 @@ var PlayTurn = React.createClass({
 });
 
 var Turn = React.createClass({
-
 	getInitialState: function() {
-
 		this.props.game = this.props.games[this.props.match[0]+"-"+this.props.match[1]];
-
-		console.log("Games:")
-		console.log(this.props.games);
-		console.log("Game:")
-		console.log(this.props.games);
-		console.log("myKey:");
-		console.log(this.props.myKey);
 
 		if(this.props.game == undefined){
 			this.props.game = {};
@@ -86,7 +74,6 @@ var Turn = React.createClass({
 	},
 
 	render: function (){
-
 		if(this.state.isEditing){
 			return (
 				<form className="form-inline">
@@ -121,8 +108,6 @@ var Turn = React.createClass({
 
 		var teamHome = this.props.teams[this.props.match[0]].teamName || "Team " + this.props.match[0];
 		var teamAway = this.props.teams[this.props.match[1]].teamName || "Team " + this.props.match[1];
-
-		console.log("Home team: " + teamHome);
 
 		return (
 			<div onClick={this._onDoubleClick}>

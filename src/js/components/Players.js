@@ -5,7 +5,6 @@ var TournActions = require('../actions/TournActions');
 var ENTER_KEY_CODE = 13;
 
 var Players = React.createClass({
-
 	getInitialState: function() {
 		return {
 			allPlayers: this.props.allPlayers || {},
@@ -14,7 +13,6 @@ var Players = React.createClass({
 	},
 
 	render: function () {
-
 		var allPlayers = this.props.allPlayers;
 		var players = [];
 
@@ -113,19 +111,10 @@ var Players = React.createClass({
 		});
 	},
 
-	/**
-   * Event handler called within TodoTextInput.
-   * Defining this here allows TodoTextInput to be used in multiple places
-   * in different ways.
-   * @param  {string} text
-   */
 	_onSave: function() {
 		TournActions.addPlayer(this.state.value);
 	},
 
-	/**
-	* @param {object} event
-	*/
 	_onChange: function(event) {
 		this.setState({
 			value: event.target.value
