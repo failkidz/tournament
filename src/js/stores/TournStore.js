@@ -20,15 +20,11 @@ var _highscore = {};
 
 function loadFromLocal(){
 
-	// console.log("YOLO: " + localStorage.getItem("YOLO"));
-
 	_currentView = JSON.parse(localStorage.getItem("_currentView"));
 	_players = JSON.parse(localStorage.getItem("_players"));
 	_teams = JSON.parse(localStorage.getItem("_teams"));
 	_schedule = JSON.parse(localStorage.getItem("_schedule"));
 	_games = JSON.parse(localStorage.getItem("_games"));
-
-	console.log(JSON.parse(null));
 
 	if(_currentView == null){
 		_currentView = "Home";
@@ -46,6 +42,9 @@ function loadFromLocal(){
 	if(_games == null){
 		_games = {};
 	}
+
+	//This will create the highscore list from the saved games
+	createHighscore();	
 }
 
 function cleanLocal(){
@@ -130,16 +129,11 @@ function shuffle(array) {
 }
 
 function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
-	console.log("Old id: " + id)
 	var newId = homeTeam+"-"+awayTeam;
 	id = newId;
-	console.log("New id: " + newId)
-
 
 	homeGoal = parseInt(homeGoal);
 	awayGoal = parseInt(awayGoal);
-
-	console.log(typeof homeGoal);
 
 	if(typeof homeGoal !== 'number' || typeof awayGoal !== 'number'){
 		alert("Goals must a number");
@@ -149,7 +143,6 @@ function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
 	var game = _games[id];
 
 	if(game === undefined){
-		console.log("Found a new game result");
 		game = {};
 	}
 
@@ -159,26 +152,15 @@ function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
 	game.homeTeam = homeTeam;
 	game.awayTeam = awayTeam;
 
-	console.log("New game result");
-	console.log(game);
-
 	_games[id] = game;
 
-	// //Update the score for each team
-	// //home wins
-	// if(homeGoal > awayGoal){
-	// 	_teams[homeTeam].score = _teams[homeTeam].score + 2; 
-	// } 
-	// else if(homeGoal == awayGoal){
-	// 	_teams[homeTeam].score = _teams[homeTeam].score + 1;
-	// 	_teams[awayTeam].score = _teams[awayTeam].score + 1;
-	// } else {
-	// 	_teams[awayTeam].score = _teams[awayTeam].score + 2;
-	// }
 	createHighscore();
 	saveToLocal();
 }
 
+/*
+ * Standard values for a scoreboard entry
+ */
 function getDefaultHighScoreRow(teamId){
 	return {
 		teamId: teamId,
@@ -193,20 +175,15 @@ function getDefaultHighScoreRow(teamId){
 	};
 }
 
+/*
+ * Creates highscore table entrys from the _games list
+ */
 function createHighscore(){
 	_highscore = {};
 	for(var gameId in _games){
 		var game = _games[gameId];
 		var hTeam = _teams[game.homeTeam];
 		var aTeam = _teams[game.awayTeam];
-
-		console.log("Home team: " + hTeam);
-
-		console.log("game:");
-		console.log(game);
-		console.log("teams:");
-		console.log(_teams);
-
 
 		//Get the current highscore rows;
 		var hRow = _highscore[game.homeTeam];
@@ -244,23 +221,13 @@ function createHighscore(){
 			aRow.points += 3;
 		}
 
-		console.log("Home rows");
-		console.log(hRow);
-		console.log("away rows:");
-		console.log(aRow);
-
 		//Save down the result
 		_highscore[game.homeTeam] = hRow;
 		_highscore[game.awayTeam] = aRow;
-
-		console.log("Final highscore:");
-		console.log(_highscore)
 	}
 }
 
 function setTeamName(teamId, teamName){
-
-	console.log("Teamid: " + teamId + "Team name: " + teamName);
 	_teams[teamId].teamName = teamName;
 	saveToLocal();
 }
