@@ -194,6 +194,7 @@ function getDefaultHighScoreRow(teamId){
 }
 
 function createHighscore(){
+	_highscore = {};
 	for(var gameId in _games){
 		var game = _games[gameId];
 		var hTeam = _teams[game.homeTeam];
