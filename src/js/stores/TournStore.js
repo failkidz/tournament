@@ -130,8 +130,10 @@ function shuffle(array) {
 }
 
 function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
+	console.log("Old id: " + id)
 	var newId = homeTeam+"-"+awayTeam;
 	id = newId;
+	console.log("New id: " + newId)
 
 
 	homeGoal = parseInt(homeGoal);
@@ -139,13 +141,14 @@ function addGameResult(id, homeGoal, awayGoal, homeTeam, awayTeam){
 
 	console.log(typeof homeGoal);
 
-	if(typeof homeGoal == 'number' && typeof awayGoal == 'number'){
+	if(typeof homeGoal !== 'number' || typeof awayGoal !== 'number'){
 		alert("Goals must a number");
 		return;
 	}
 
 	var game = _games[id];
-	if(game == undefined){
+
+	if(game === undefined){
 		console.log("Found a new game result");
 		game = {};
 	}
@@ -186,11 +189,13 @@ function getDefaultHighScoreRow(teamId){
 		won:0,
 		lost:0,
 		draw:0,
+		points:0
 	};
 }
 
 function createHighscore(){
-	for(var game in _games){
+	for(var gameId in _games){
+		var game = _games[gameId];
 		var hTeam = _teams[game.homeTeam];
 		var aTeam = _teams[game.awayTeam];
 
@@ -246,6 +251,9 @@ function createHighscore(){
 		//Save down the result
 		_highscore[game.homeTeam] = hRow;
 		_highscore[game.awayTeam] = aRow;
+
+		console.log("Final highscore:");
+		console.log(_highscore)
 	}
 }
 

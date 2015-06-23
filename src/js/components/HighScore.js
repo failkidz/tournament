@@ -5,6 +5,9 @@ var HighScore = React.createClass({
 
 	render: function () {
 
+		console.log("Hightscore prop: ");
+		console.log(this.props.highscore);
+
 		if(this.props.currentView != "HighScore"){
 			return null;
 		}
@@ -22,7 +25,7 @@ var HighScore = React.createClass({
 		return (
 			<div className="panel panel-default">
 				<div className="panel-body">
-					<ScoreTable key={"scorelist"} teams={this.props.teams} />
+					<ScoreTable key={"scorelist"} teams={this.props.teams} highscore={this.props.highscore} />
 				</div>
 			</div>
 		);
@@ -32,8 +35,14 @@ var HighScore = React.createClass({
 var ScoreTable = React.createClass({
 	render: function(){
 
+		// console.log("Hightscore prop: ");
+		// console.log(this.props.highscore);
+
 		var allHighscore = this.props.highscore;
 		var localTeams = this.props.teams;
+
+		console.log("localTeams:")
+		console.log(localTeams)
 
 		var localScoreRows = [];
 		var scoreRows = [];
@@ -53,7 +62,8 @@ var ScoreTable = React.createClass({
   		localScoreRows.sort(compare);
   		localScoreRows.reverse();
   		for(var i = 0; i < localScoreRows.length; i++){
-  			scoreRows.push(<ScoreRow key={"row"+i} team={localTeams[i]} highscore={localScoreRows[i]} rowNumber={i} />);
+
+  			scoreRows.push(<ScoreRow key={"row"+i} team={localTeams[localScoreRows[i].teamId]} highscore={localScoreRows[i]} rowNumber={i} />);
   		}
 
 		return (
@@ -82,8 +92,14 @@ var ScoreTable = React.createClass({
 
 var ScoreRow = React.createClass({
 	render: function() {
+
+		console.log("Props:");
+		console.log(this.props);
 		var team = this.props.team;
 		var hs = this.props.highscore;
+
+		console.log("Team: ");
+		console.log(team);
 
 		var teamName = team.teamName || "Team #"+team.id;
 
@@ -93,7 +109,7 @@ var ScoreRow = React.createClass({
 				<td>{hs.teamName}</td>
 				<th>{hs.played}</th>
 				<th>{hs.won}</th>
-				<th>{hs.drawn}</th>
+				<th>{hs.draw}</th>
 				<th>{hs.lost}</th>
 				<th>{hs.goalMade}</th>
 				<th>{hs.goalLetIn}</th>
