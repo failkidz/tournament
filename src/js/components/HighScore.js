@@ -67,25 +67,27 @@ var ScoreTable = React.createClass({
   		}
 
 		return (
-			<table className="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Team</th>
-						<th>Played</th>
-						<th>Won</th>
-						<th>Drawn</th>
-						<th>Lost</th>
-						<th>For</th>
-						<th>Against</th>
-						<th>+/-</th>
-						<th>Points</th>
-					</tr>
-				</thead>
-				<tbody>
-					{scoreRows}
-				</tbody>
-			</table>
+			<div className="table-responsive">
+				<table className="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Team</th>
+							<th>Played</th>
+							<th>Won</th>
+							<th>Drawn</th>
+							<th>Lost</th>
+							<th>For</th>
+							<th>Against</th>
+							<th>+/-</th>
+							<th>Points</th>
+						</tr>
+					</thead>
+					<tbody>
+						{scoreRows}
+					</tbody>
+				</table>
+			</div>
 		);
 	}
 });
