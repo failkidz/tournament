@@ -8,27 +8,27 @@ var ButtonRow = React.createClass({
 		var navbars = []
 
 		if(this.props.currentView == "Home"){
-			navbars.push(<li className="active"><a onClick={this._onHomeClick}>Home</a></li>);
+			navbars.push(<li key="home" className="active"><a onClick={this._onHomeClick}>Home</a></li>);
 		} else {
-			navbars.push(<li><a onClick={this._onHomeClick}>Home</a></li>);
+			navbars.push(<li key="home"><a onClick={this._onHomeClick}>Home</a></li>);
 		}
 
 		if(this.props.currentView == "Teams"){
-			navbars.push(<li className="active"><a onClick={this._onTeamClick}>Teams</a></li>);
+			navbars.push(<li key="teams" className="active"><a onClick={this._onTeamClick}>Teams</a></li>);
 		} else {
-			navbars.push(<li><a onClick={this._onTeamClick}>Teams</a></li>);
+			navbars.push(<li key="teams"><a onClick={this._onTeamClick}>Teams</a></li>);
 		}
 
 		if(this.props.currentView == "Schedule"){
-			navbars.push(<li className="active"><a onClick={this._onHighScoreClick}>Schedule</a></li>);
+			navbars.push(<li key="schedule" className="active"><a onClick={this._onHighScoreClick}>Schedule</a></li>);
 		} else {
-			navbars.push(<li><a onClick={this._onHighScoreClick}>Schedule</a></li>);
+			navbars.push(<li key="schedule"><a onClick={this._onHighScoreClick}>Schedule</a></li>);
 		}
 
 		if(this.props.currentView == "HighScore"){
-			navbars.push(<li className="active"><a onClick={this._onScoreBoardClick}>Scoreboard</a></li>);
+			navbars.push(<li key="highscore" className="active"><a onClick={this._onScoreBoardClick}>Scoreboard</a></li>);
 		} else {
-			navbars.push(<li><a onClick={this._onScoreBoardClick}>Scoreboard</a></li>);
+			navbars.push(<li key="highscore"><a onClick={this._onScoreBoardClick}>Scoreboard</a></li>);
 		}
 
 		return (
