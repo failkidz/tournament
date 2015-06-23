@@ -106,7 +106,7 @@ var ScoreRow = React.createClass({
 		return (
 			<tr>
 				<td>{this.props.rowNumber+1}</td>
-				<td>{hs.teamName}</td>
+				<td>{teamName}</td>
 				<th>{hs.played}</th>
 				<th>{hs.won}</th>
 				<th>{hs.draw}</th>
