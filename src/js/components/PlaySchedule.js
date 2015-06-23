@@ -63,7 +63,14 @@ var Turn = React.createClass({
 
 	getInitialState: function() {
 
-		this.props.game = this.props.games[this.props.myKey];
+		this.props.game = this.props.games[this.props.match[0]+"-"+this.props.match[1]];
+
+		console.log("Games:")
+		console.log(this.props.games);
+		console.log("Game:")
+		console.log(this.props.games);
+		console.log("myKey:");
+		console.log(this.props.myKey);
 
 		if(this.props.game == undefined){
 			this.props.game = {};
