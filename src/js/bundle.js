@@ -20183,7 +20183,7 @@ module.exports = TournStore;
 var App = require('./components/App.react');
 var React = require('react');
 
-React.renderComponent(
+React.render(
 	React.createElement(App, null),
 	document.getElementById('react')
 );
