@@ -4,7 +4,7 @@ Simple tournament web app for two man teams.
 
 ## Live demo
 
-The web app is up and running at https://failkidz.com/tournament
+The web app is up and running at https://failkidz.com/tournament/
 
 ## Develop
 
