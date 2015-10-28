@@ -18,6 +18,13 @@ npm start
 ````
 3. Open [index.html](https://github.com/failkidz/tournament/blob/master/src/index.html) in your browser
 
+## Build
+
+To build the bundle.min.js file use following command:
+````
+npm run build
+````
+
 ## Licence
 
 [MIT LICENCE](https://github.com/failkidz/tournament/blob/master/LICENSE.md)
