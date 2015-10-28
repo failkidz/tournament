@@ -36,7 +36,7 @@ var StartPage = React.createClass({
 		if (answer != null && answer === "delete") {
 			TournActions.deleteData();
 		} else {
-			alert("You didnt type delete, nothing has been deleted");
+			alert("You didn't type delete, nothing has been deleted");
 		}
 	}
 });
