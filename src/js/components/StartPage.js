@@ -13,7 +13,7 @@ var StartPage = React.createClass({
 	  				<h1>Tournament <small>by Failkidz</small></h1>
 				</div>
 				<div>
-					<p>Simple torunamt web app for 2 player teams. Minimum is 4 players.</p>
+					<p>Simple tournament web app for 2 player teams. Minimum is 4 players.</p>
 					<h3>Data</h3>
 					<p>All the game data i stored locally in your browser(local storage). 
 					Until you clear out your browser or use the button below the data will be saved. Even if you close this page.</p>
@@ -25,7 +25,7 @@ var StartPage = React.createClass({
 					>Clear saved data</button>
 
 					<h3>Source code</h3>
-					<p>Source code avaible on <a href="http://github.com/failkidz/tournament">Github</a></p>
+					<p>Source code available on <a href="http://github.com/failkidz/tournament">Github</a></p>
 				</div>
 			</div>
 		);
@@ -36,7 +36,7 @@ var StartPage = React.createClass({
 		if (answer != null && answer === "delete") {
 			TournActions.deleteData();
 		} else {
-			alert("You didnt type delete, nothing has been deleted");
+			alert("You didn't type delete, nothing has been deleted");
 		}
 	}
 });
