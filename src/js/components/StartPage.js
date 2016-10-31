@@ -18,6 +18,8 @@ var StartPage = React.createClass({
 					<p>All the game data i stored locally in your browser(local storage). 
 					Until you clear out your browser or use the button below the data will be saved. Even if you close this page.</p>
 
+					<p><i><b>Hint:</b></i> Double-click on <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span> to edit team names and match scores</p>
+
 					<button 
 						type="button"
 						className="btn btn-danger"
