@@ -29,7 +29,6 @@ function loadFromLocal(){
 	if(_currentView == null){
 		_currentView = "Home";
 	}
-
 	if(_players == null){
 		_players = {};
 	}
@@ -77,7 +76,6 @@ function generateTeams(){
 	for(var key in _players){
 		players.push(_players[key]);
 	}
-
 
 	if((players.length & 1 ) != 0 ){
 		var nextId = players.length + 1;
