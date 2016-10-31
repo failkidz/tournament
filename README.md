@@ -25,6 +25,10 @@ To build the bundle.min.js file use following command:
 npm run build
 ````
 
+## History
+
+This idea started out as project for a school course but with the exception it was written in java and hosted with a Tomcat server. Therefor I decided to rewrite it in React to have it hosted on Github Pages.
+
 ## Licence
 
 [MIT LICENCE](https://github.com/failkidz/tournament/blob/master/LICENSE.md)
