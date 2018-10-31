@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "STATIC_ROOT=./static watchify -o src/js/bundle.js -v -d .",
-    "build": "STATIC_ROOT=./static NODE_ENV=production browserify . | uglifyjs -cm > src/js/bundle.min.js"
+    "build": "STATIC_ROOT=./static NODE_ENV=production browserify . | uglifyjs -cm -o src/js/bundle.min.js"
   },
   "browserify": {
     "transform": [
